@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Estate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/estates}" style="text-decoration: none; color: inherit;">
+        <h1 class="display-4">Libro - Ваша Библиотека</h1>
+        <p class="lead">Читайте книги с нами!</p>
+    </a>
+</nav>
+<form th:method="POST" th:action="@{/estates/user/{id}/update(id=${estate.id})}" th:object="${estate}" class="container mt-5">
+    <div class="mb-3">
+        <label for="adName">Название:</label>
+        <input type="text" id="adName" class="form-control" th:field="*{adName}" required/>
+    </div>
+    <div class="mb-3">
+        <label for="location">Местоположение:</label>
+        <input type="text" id="location" class="form-control" th:field="*{location}" required/>
+    </div>
+    <div class="mb-3">
+        <label for="price">Цена:</label>
+        <input type="number" id="price" class="form-control" th:field="*{price}" required/>
+    </div>
+    <div class="mb-3">
+        <label for="priceForMonth">Цена в месяц:</label>
+        <input type="number" id="priceForMonth" class="form-control" th:field="*{priceForMonth}" required/>
+    </div>
+
+    <div class="mb-3">
+        <label for="mortgagePrice">Ипотечная цена:</label>
+        <input type="number" id="mortgagePrice" class="form-control" th:field="*{mortgagePrice}" required/>
+    </div>
+
+    <div class="mb-3">
+        <label for="area">Площадь:</label>
+        <input type="number" id="area" class="form-control" th:field="*{area}" required/>
+    </div>
+
+    <div class="mb-3">
+        <label for="houseArea">Площадь дома:</label>
+        <input type="number" id="houseArea" class="form-control" th:field="*{houseArea}" required/>
+    </div>
+
+    <div class="mb-3">
+        <label for="metroStation">Станция метро:</label>
+        <input type="text" id="metroStation" class="form-control" th:field="*{metroStation}" required/>
+    </div>
+
+    <div class="mb-3">
+        <label for="trainStation">Железнодорожная станция:</label>
+        <input type="text" id="trainStation" class="form-control" th:field="*{trainStation}" required/>
+    </div>
+
+    <div class="mb-3">
+        <label for="description">Описание:</label>
+        <textarea id="description" class="form-control" th:field="*{description}" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="status">Статус:</label>
+        <input type="text" id="status" class="form-control" th:field="*{status}" required/>
+    </div>
+
+    <div class="mb-3">
+        <label for="estateRating">Рейтинг:</label>
+        <input type="number" id="estateRating" class="form-control" th:field="*{estateRating}" required/>
+    </div>
+
+    <!-- Add other fields as needed -->
+
+    <input type="submit" class="btn btn-primary" value="Update">
+</form>
+</body>
+</html>

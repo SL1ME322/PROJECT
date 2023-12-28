@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Libro - Your Book Library</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/templates/estates}" style="text-decoration: none; color: inherit;">
+        <h1 class="display-4">Estate Book - библиотека недвижимости </h1>
+
+    </a>
+</nav>
+
+<form method="post" action="/estates/search" th:action="@{/estates/search}" class="form-inline mt-3">
+    <div class="form-group mr-2">
+        <select class="form-control" name="searchField">
+            <option value="estate">Estate</option>
+            <!--<option value="author">Author</option>
+            <option value="library">Library</option>
+            <option value="publisher">Publisher</option>
+            <option value="review">Review</option>-->
+        </select>
+    </div>
+    <div class="form-group mr-2">
+        <input type="text" class="form-control" name="searchTerm" placeholder="Search">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<h2>Недвижимость</h2>
+<ul class="list-group">
+    <li th:each="estate : ${estates}" class="list-group-item">
+        <a th:href="@{/estates/user/{id}(id=${estate.getId()})}">
+            <span th:text="${estate.getAdName()}"></span> ,владелец -  <span th:text="${estate.getUser()}"></span>
+        </a>
+    </li>
+</ul>
+<h2>Уведомления пользователя</h2>
+<ul class="list-group">
+    <li th:each="notification : ${notifications}" class="list-group-item">
+        <a th:href="@{/estates/notifications/{id}(id=${notification.getId()})}">
+            <span th:text="${notification.getNotificationHeader()}"></span> ,пользователь -  <span th:text="${notification.getUser().getLogin()}"></span>
+        </a>
+    </li>
+</ul>
+<h2>Тэги:</h2>
+<ul class="list-group">
+    <li th:each="tag : ${tags}" class="list-group-item">
+        <a th:href="@{/estates/tags/{id}(id=${tag.getId()})}">
+            <span th:text="${tag.getTagName()}"  ></span>
+        </a>
+    </li>
+</ul>
+<h2>Тэги недвижимости:</h2>
+<ul class="list-group">
+    <li th:each="tagAndEstate : ${tagsAndEstates}" class="list-group-item">
+        <a th:href="@{/estates/tagAndEstate/{id}(id=${tagAndEstate.getId()})}">
+            <span th:text="${tagAndEstate.getTag().getTagName()}"  ></span>
+        </a>
+    </li>
+</ul>
+<h2>История пользователя:</h2>
+<ul class="list-group">
+    <li th:each="tagAndEstate : ${tagsAndEstates}" class="list-group-item">
+        <a th:href="@{/estates/tagAndEstate/{id}(id=${tagAndEstate.getId()})}">
+            <span th:text="${tagAndEstate.getTag().getTagName()}"  ></span>
+        </a>
+    </li>
+</ul>
+<h2>"Посмотреть позже":</h2>
+<ul class="list-group">
+    <li th:each="watchLaterEstate : ${watchLaterEstates}" class="list-group-item">
+        <a th:href="@{/estates/watchLaterEstate/{id}(id=${watchLaterEstate.getId()})}">
+            <span th:text="${watchLaterEstate.getEstate()}"  >,пользователь -  <span th:text="${watchLaterEstate.getUser().getLogin()}"></span></span>
+        </a>
+    </li>
+</ul>
+<h2>"Отклоненные объявления":</h2>
+<ul class="list-group">
+    <li th:each="declinedAd : ${declinedAds}" class="list-group-item">
+        <a th:href="@{/estates/declinedAds/{id}(id=${declinedAd.getId()})}">
+            <span th:text="${declinedAd.getEstate().getAdName()}"  >,пользователь -  <span th:text="${declinedAd.getModerator().getLogin()}"></span></span>
+        </a>
+    </li>
+</ul>
+<h2>"Рецензия пользователя":</h2>
+<ul class="list-group">
+    <li th:each="userReview : ${usersReview}" class="list-group-item">
+        <a th:href="@{/estates/userReviews/{id}(id=${userReview.getId()})}">
+            <span th:text="${userReview.getUserReceiver().getLogin()}"  >,пользователь -  <span th:text="${userReview.getUserReceiver().getLogin()}"></span></span>
+        </a>
+    </li>
+</ul>
+<a class="btn btn-primary" href="/estates/user/new">Создать новое объявление</a>
+<a class="btn btn-primary" href="/estates/newTag">Создать новый тэг</a>
+<a class="btn btn-primary" href="/estates/newNotification">Создать нового уведомления</a>
+
+<a class="btn btn-primary" href="/estates/newTagAndEstate">Создать новый тег для недвижимости</a>
+<a class="btn btn-primary" href="/estates/newWatchLaterEstate">Создать недвижимость для просмотра позже</a>
+<a class="btn btn-primary" href="/estates/newDeclinedAd">Создать отмененное объявление</a>
+<a class="btn btn-primary" href="/estates/newUserReview">Создать рецензию пользователя</a>
+</body>
+</html>
